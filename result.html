@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نتيجة المدرسة</title>
+<style>
+body { font-family: Arial; background: #f0f4f8; text-align: center; padding: 20px; }
+.box { background: white; max-width: 500px; margin: auto; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px #ccc; }
+input { padding: 10px; width: 80%; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; text-align: center; }
+button { padding: 10px 20px; background: #1a56db; color: white; border: none; border-radius: 5px; cursor: pointer; }
+table { width: 100%; margin-top: 15px; border-collapse: collapse; }
+td, th { border: 1px solid #ddd; padding: 8px; }
+th { background: #1a56db; color: white; }
+</style>
+</head>
+<body>
+<div class="box">
+<h2>استعلم عن نتيجتك</h2>
+<input type="text" id="seat" placeholder="ادخل رقم الجلوس">
+<br>
+<button onclick="getResult()">عرض النتيجة</button>
+<div id="output"></div>
+</div>
+
+<script>
+async function getResult() {
+  const seat = document.getElementById('seat').value.trim();
+  const res = await fetch('grades.json');
+  const data = await res.json();
+  const out = document.getElementById('output');
+  if(data[seat]) {
+    const s = data[seat];
+    out.innerHTML = `<h3>${s.name} - رقم الجلوس ${seat}</h3>
+    <table>
+    <tr><th>المادة</th><th>الدرجة</th></tr>
+    <tr><td>اللغة العربية</td><td>${s.arabic}</td></tr>
+    <tr><td>الرياضيات</td><td>${s.math}</td></tr>
+    <tr><td>اللغة الإنجليزية</td><td>${s.english}</td></tr>
+    <tr><td>العلوم</td><td>${s.science}</td></tr>
+    <tr><th>المجموع</th><th>${s.total}</th></tr>
+    </table>`;
+  } else {
+    out.innerHTML = `<p style="color:red">رقم الجلوس غير موجود</p>`;
+  }
+}
+</script>
+</body>
+</html>
