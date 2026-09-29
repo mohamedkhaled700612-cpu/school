@@ -1,0 +1,18 @@
+{
+  "1001": {
+    "name": "محمد خالد",
+    "arabic": 48,
+    "math": 55,
+    "english": 50,
+    "science": 45,
+    "total": 198
+  },
+  "1002": {
+    "name": "أحمد علي",
+    "arabic": 40,
+    "math": 42,
+    "english": 38,
+    "science": 44,
+    "total": 164
+  }
+}
